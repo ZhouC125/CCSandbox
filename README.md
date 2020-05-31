@@ -1,6 +1,6 @@
 # cc-sandbox
 
-一个基于MVVM设计的Cocos Creator游戏框架，model->viewModel->view  利用js getter setter 实现数据绑定，框架内包含完整的热更新流程（子包压缩，多渠道可视化配置一键出包）。自动创建模板，多语言配置插件，如果有必须要会把一键换肤的功能更新上来
+一个基于MVVM设计的Cocos Creator游戏框架，model->viewModel->view  利用js getter setter 实现数据绑定，框架内包含完整的热更新流程（子包压缩，多渠道可视化配置一键出包）。自动创建模板，多语言配置，如果有必须要会把一键换肤的功能更新上来
 
 版本更新 1.0.0
 ---
