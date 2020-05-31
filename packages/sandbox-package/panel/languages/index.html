@@ -1,0 +1,231 @@
+<h2>多语言配置</h2>
+<header></header>
+<section v-if="show">
+    <ui-prop v-if="!isCreateTemplage" tabindex="-1" name="当前语言模板">
+        <ui-select class="flex-1" tabindex="-1" @confirm="onChangeTemplate($event)" v-value="setting.currentTemplage">
+            <option value="">选择语言模板</option>
+            <option v-for="(index,item) in setting.templates" v-value="index">{{item}}</option>
+        </ui-select>
+        <ui-button @confirm="isCreateTemplage=true">创建语言模板</ui-button>
+    </ui-prop>
+    <ui-prop auto-height tabindex="-1" name="创建语言模板" v-if="isCreateTemplage">
+        <ui-box-container auto-height class="flex-1 shadow ">
+            <ui-prop tabindex="-1" name="模板名称">
+                <div class="flex-1 layout horizontal center">
+                    <ui-input placeholder="请输模板名" class="flex-2" tabindex="-1" v-value="createTemplageInput">
+                    </ui-input>
+                </div>
+            </ui-prop>
+            <div class="flex-1 layout horizontal end-justified">
+                <ui-button @confirm="isCreateTemplage=false">取消</ui-button>
+                <ui-button class="green" @confirm="onCreateTemplage(createTemplageInput)">创建</ui-button>
+            </div>
+        </ui-box-container>
+    </ui-prop>
+    <div v-if="setting.templates[setting.currentTemplage]">
+
+        <div class="layout horizontal end-justified">
+            <ui-button class="transparent huge">
+                <i v-bind:class="{'icon-trash-empty color-red':!isDelete,'icon-ok color-green':isDelete}"
+                    @click="isDelete=!isDelete"></i>
+            </ui-button>
+            <ui-button class="transparent huge">
+                <i v-bind:class="{'icon-left-dir':keyInfos.length==0,'icon-down-dir':keyInfos.length>0}"
+                    @click="onShowKeyInfos()"></i>
+            </ui-button>
+        </div>
+        <!----------------------------------------- 文本 -->
+        <ui-prop auto-height class="flex-1 " tabindex="-1" name="文本 - Label" auto-height>
+            <ui-box-container auto-height class="flex-1 shadow">
+                <ui-prop v-for="(key,value) in getTextKeyValueMap()" tabindex="-1" name="{{key}}" auto-height>
+                    <div class="wrapper layout vertical">
+                        <div class="wrapper layout horizontal justified">
+                            <ui-button v-if="!isDelete" class="transparent small">
+                                <i v-if="showState"
+                                    v-bind:class="{'icon-ok color-green': isKeyValueOk(value),'icon-cancel color-red': !isKeyValueOk(value)}"></i>
+                            </ui-button>
+                            <ui-button v-if="isDelete" class="transparent small" @confirm="onDeleteText(key)">
+                                <i class="icon-trash-empty color-red"></i>
+                            </ui-button>
+                            <ui-button class="transparent small" @confirm="onShowKeyInfo(key)">
+                                <i
+                                    v-bind:class="{'icon-left-dir':!keyInfos.includes(key),'icon-down-dir':keyInfos.includes(key)}"></i>
+                            </ui-button>
+                        </div>
+
+                        <div v-if="keyInfos.includes(key)">
+                            <ui-prop v-for="(langKey,langValue) in getTextKeyValueMap()[key]" tabindex="-1"
+                                v-if="langKey=='note'" name="/** 注释 */" class="flex-1">
+                                <ui-input placeholder="请输入注释内容" @confirm="onChangeLangValue()" class="flex-1"
+                                    tabindex="-1" v-value="langValue">
+                                </ui-input>
+                            </ui-prop>
+
+                            <ui-prop v-for="(langKey,langValue) in getTextKeyValueMap()[key]" tabindex="-1"
+                                v-if="langKey!='note'" name="{{langKey}}" class="flex-1">
+                                <ui-input placeholder="请输入 {{langKey}} 的值" @confirm="onChangeLangValue()" class="flex-1"
+                                    tabindex="-1" v-value="langValue">
+                                </ui-input>
+                                <ui-button v-if="isDelete" class="transparent small"
+                                    @confirm="onDeleteText(key,langKey)">
+                                    <i class="icon-trash-empty color-red"></i>
+                                </ui-button>
+                            </ui-prop>
+                        </div>
+                    </div>
+                </ui-prop>
+
+                <!-- 创建key -->
+                <div class="wrapper layout horizontal end-justified">
+                    <ui-button class="transparent huge">
+                        <i class="icon-plus green" @click="isCreateTextKey=true"></i>
+                    </ui-button>
+                </div>
+                <div v-if="isCreateTextKey">
+                    <ui-text-area placeholder="json格式：[ { key:{note:'注释内容',zh_cn:'中文',en:'English'} } ]" resize-v
+                        tabindex="-1" class="flex-1 huge layout horizontal justified" v-value="createKeyInput">
+                    </ui-text-area>
+                    <div class="layout horizontal end-justified">
+                        <ui-button class="red" @confirm="isCreateTextKey=false">取消</ui-button>
+                        <ui-button class="green" @confirm="onCreateTextKey(createKeyInput)">确定</ui-button>
+                    </div>
+                </div>
+            </ui-box-container>
+        </ui-prop>
+        <!----------------------------------------- 精灵 -->
+        <ui-prop auto-height class="flex-1 " tabindex="-1" name="精灵 - Sprite" auto-height>
+            <ui-box-container auto-height class="flex-1 shadow">
+                <ui-prop v-for="(key,value) in getSpriteKeyValueMap()" tabindex="-1" name="{{key}}" auto-height>
+                    <div class="wrapper layout vertical">
+                        <div class="wrapper layout horizontal justified">
+                            <ui-button v-if="!isDelete" class="transparent small">
+                                <i v-if="showState"
+                                    v-bind:class="{'icon-ok color-green': isKeyValueOk(value),'icon-cancel color-red': !isKeyValueOk(value)}"></i>
+                            </ui-button>
+                            <ui-button v-if="isDelete" class="transparent small" @confirm="onDeleteSprite(key)">
+                                <i class="icon-trash-empty color-red"></i>
+                            </ui-button>
+                            <ui-button class="transparent small" @confirm="onShowKeyInfo(key)">
+                                <i
+                                    v-bind:class="{'icon-left-dir':!keyInfos.includes(key),'icon-down-dir':keyInfos.includes(key)}"></i>
+                            </ui-button>
+                        </div>
+
+                        <div v-if="keyInfos.includes(key)">
+                            <ui-prop v-for="(langKey,langValue) in getSpriteKeyValueMap()[key]" tabindex="-1"
+                                v-if="langKey=='note'" name="/** 注释 */" class="flex-1">
+                                <ui-input placeholder="请输入注释内容" @confirm="onChangeLangValue()" class="flex-1"
+                                    tabindex="-1" v-value="langValue">
+                                </ui-input>
+                            </ui-prop>
+                            <ui-prop v-for="(langKey,langValue) in getSpriteKeyValueMap()[key]" tabindex="-1"
+                                v-if="langKey=='module'" name="资源所在模块" class="flex-1">
+                                <ui-input placeholder="请输入资源所在模块" @confirm="onChangeLangValue()" class="flex-1"
+                                    tabindex="-1" v-value="langValue">
+                                </ui-input>
+                            </ui-prop>
+                            <ui-prop v-for="(langKey,langValue) in getSpriteKeyValueMap()[key]" tabindex="-1"
+                                v-if="langKey!='note' && langKey!='module'" name="{{langKey}}" class="flex-1">
+                                <ui-input placeholder="请输入 {{langKey}} 的值" @confirm="onChangeLangValue()" class="flex-1"
+                                    tabindex="-1" v-value="langValue">
+                                </ui-input>
+                                <ui-button v-if="isDelete" class="transparent small"
+                                    @confirm="onDeleteSprite(key,langKey)">
+                                    <i class="icon-trash-empty color-red"></i>
+                                </ui-button>
+                            </ui-prop>
+                        </div>
+
+
+                    </div>
+                </ui-prop>
+
+                <!-- 创建key -->
+                <div class="wrapper layout horizontal end-justified">
+                    <ui-button class="transparent huge">
+                        <i class="icon-plus green" @click="isCreateSpriteKey=true"></i>
+                    </ui-button>
+                </div>
+                <div v-if="isCreateSpriteKey">
+                    <ui-text-area placeholder="json格式：[ { key:{note:'注释内容',zh_cn:'中文',en:'English'} } ]" resize-v
+                        tabindex="-1" class="flex-1 huge layout horizontal justified" v-value="createKeyInput">
+                    </ui-text-area>
+                    <div class="layout horizontal end-justified">
+                        <ui-button class="red" @confirm="isCreateSpriteKey=false">取消</ui-button>
+                        <ui-button class="green" @confirm="onCreateSpriteKey(createKeyInput)">确定</ui-button>
+                    </div>
+                </div>
+            </ui-box-container>
+        </ui-prop>
+
+
+
+
+
+        <!----------------------------------------- 音效 -->
+        <ui-prop auto-height class="flex-1 " tabindex="-1" name="音效 - Audio" auto-height>
+            <ui-box-container auto-height class="flex-1 shadow">
+                <ui-prop v-for="(key,value) in getAudioKeyValueMap()" tabindex="-1" name="{{key}}" auto-height>
+                    <div class="wrapper layout vertical">
+                        <div class="wrapper layout horizontal justified">
+                            <ui-button v-if="!isDelete" class="transparent small">
+                                <i v-if="showState"
+                                    v-bind:class="{'icon-ok color-green': isKeyValueOk(value),'icon-cancel color-red': !isKeyValueOk(value)}"></i>
+                            </ui-button>
+                            <ui-button v-if="isDelete" class="transparent small" @confirm="onDeleteAudio(key)">
+                                <i class="icon-trash-empty color-red"></i>
+                            </ui-button>
+                            <ui-button class="transparent small" @confirm="onShowKeyInfo(key)">
+                                <i
+                                    v-bind:class="{'icon-left-dir':!keyInfos.includes(key),'icon-down-dir':keyInfos.includes(key)}"></i>
+                            </ui-button>
+                        </div>
+
+                        <div v-if="keyInfos.includes(key)">
+                            <ui-prop v-for="(langKey,langValue) in getAudioKeyValueMap()[key]" tabindex="-1"
+                                v-if="langKey=='note'" name="/** 注释 */" class="flex-1">
+                                <ui-input placeholder="请输入注释内容" @confirm="onChangeLangValue()" class="flex-1"
+                                    tabindex="-1" v-value="langValue">
+                                </ui-input>
+                            </ui-prop>
+                            <ui-prop v-for="(langKey,langValue) in getAudioKeyValueMap()[key]" tabindex="-1"
+                                v-if="langKey=='module'" name="资源所在模块" class="flex-1">
+                                <ui-input placeholder="请输入资源所在模块" @confirm="onChangeLangValue()" class="flex-1"
+                                    tabindex="-1" v-value="langValue">
+                                </ui-input>
+                            </ui-prop>
+                            <ui-prop v-for="(langKey,langValue) in getAudioKeyValueMap()[key]" tabindex="-1"
+                                v-if="langKey!='note' && langKey!='module'" name="{{langKey}}" class="flex-1">
+                                <ui-input placeholder="请输入 {{langKey}} 的值" @confirm="onChangeLangValue()" class="flex-1"
+                                    tabindex="-1" v-value="langValue">
+                                </ui-input>
+                                <ui-button v-if="isDelete" class="transparent small"
+                                    @confirm="onDeleteAudio(key,langKey)">
+                                    <i class="icon-trash-empty color-red"></i>
+                                </ui-button>
+                            </ui-prop>
+                        </div>
+
+
+                    </div>
+                </ui-prop>
+
+                <!-- 创建key -->
+                <div class="wrapper layout horizontal end-justified">
+                    <ui-button class="transparent huge">
+                        <i class="icon-plus green" @click="isCreateAudioKey=true"></i>
+                    </ui-button>
+                </div>
+                <div v-if="isCreateAudioKey">
+                    <ui-text-area placeholder="json格式：[ { key:{note:'注释内容',zh_cn:'中文',en:'English'} } ]" resize-v
+                        tabindex="-1" class="flex-1 huge layout horizontal justified" v-value="createKeyInput">
+                    </ui-text-area>
+                    <div class="layout horizontal end-justified">
+                        <ui-button class="red" @confirm="isCreateAudioKey=false">取消</ui-button>
+                        <ui-button class="green" @confirm="onCreateAudioKey(createKeyInput)">确定</ui-button>
+                    </div>
+                </div>
+            </ui-box-container>
+        </ui-prop>
+    </div>
+</section>

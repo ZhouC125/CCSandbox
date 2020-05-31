@@ -1,0 +1,50 @@
+<h2>一键换肤 待更新</h2>
+<header></header>
+<section>
+    <ui-hint v-if="errMsg" class="bottom small red">{{errMsg}}</ui-hint>
+    <ui-loader v-if="showLoader" class="green">{{loadMsg}}</ui-loader>
+    <div v-if="isCreateTemplate==0">
+        <ui-prop tabindex="-1" name="当前模版">
+            <ui-select class="flex-1" tabindex="-1" @confirm="" v-value="setting.currentTemplate">
+                <option value="">选择模版</option>
+                <option v-for="(index,item) in setting.templates" v-value="index">{{index}}</option>
+            </ui-select>
+            <ui-button @confirm="isCreateTemplate=1">创建皮肤模版</ui-button>
+        </ui-prop>
+    </div>
+
+    <ui-prop auto-height tabindex="-1" name="创建皮肤模版" v-if="isCreateTemplate==1">
+        <ui-box-container auto-height class="flex-1 shadow ">
+            <ui-prop tabindex="-1" name="模版名称">
+                <div class="flex-1 layout horizontal center">
+                    <ui-input placeholder="请输入皮肤名称，英文或数字" class="flex-2" tabindex="-1" v-value="templateName">
+                    </ui-input>
+                </div>
+            </ui-prop>
+            <div class="flex-1 layout horizontal end-justified">
+                <ui-button @confirm="isCreateTemplate=0">取消</ui-button>
+                <ui-button class="green" @confirm="onCreateTemplate">创建</ui-button>
+            </div>
+        </ui-box-container>
+    </ui-prop>
+    <ui-prop v-if="setting" auto-height tabindex="-1" name="模块">
+        <ui-box-container auto-height class="flex-1 shadow ">
+            <ui-prop auto-height v-for="(module,layouts) in modules" name="{{module}}" tabindex="-1">
+                <ui-select class="flex-1 large " tabindex="-1"
+                    v-value="setting.templates[setting.currentTemplate][module].layout">
+                    <option v-for="(layout , skins) in layouts" value="{{layout}}">{{layout}}</option>
+                </ui-select>
+                <ui-select class="flex-1 large" tabindex="-1"
+                    v-value="setting.templates[setting.currentTemplate][module].skin">
+                    <option v-for="skin in layouts[setting.templates[setting.currentTemplate][module].layout]"
+                        value="{{skin}}">{{skin}}
+                    </option>
+                </ui-select>
+            </ui-prop>
+
+        </ui-box-container>
+    </ui-prop>
+</section>
+<footer class="group layout horizontal center">
+    <ui-button class="green" @confirm="onSave">确定</ui-button>
+</footer>

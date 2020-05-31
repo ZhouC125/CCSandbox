@@ -1,0 +1,107 @@
+@import url(app://node_modules/font-awesome/css/font-awesome.min.css);.progress ui-progress,.state{width:100%}:host{display:flex;flex-direction:column}h2{margin:20px 20px 0;font-size:26px;color:#DDD}header{display:flex;margin:0 20px;padding:20px 0;border-bottom:1px solid #666}.progress{flex:14;position:relative}.state{position:absolute;top:0;left:0;line-height:16px;margin:0 15px 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center;color:#fff}.state[state=failed]{color:red}section{margin:10px;padding:0 10px;flex:1;overflow-y:auto}.fix-width{width:1px}.height-limited{max-height:240px}.height-limited ui-box-container{max-height:228px;min-height:100px}ui-box-container li{margin:4px 0}ui-box-container li .fa.fa-star{color:#ff0}footer{border-top:1px solid #666;padding:15px 0;margin:0 20px;justify-content:flex-end}
+h2 {
+    color: #f90;
+  }
+
+.wrapper {
+    position: relative;
+    flex: 1;
+    background: #333;
+    margin-bottom: 5px;
+}
+
+.wrapper:last-child {
+    margin-bottom: 0px;
+}
+.large{
+
+}
+.wrapper > .box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 3px 10px;
+    box-sizing: border-box;
+    width: 60px;
+    height: 30px;
+    margin: 5px;
+
+    font-weight: bold;
+    background: #666;
+
+    white-space: nowrap;
+    overflow: hidden;
+    }
+
+.wrapper.horizontal > .box:not(:last-child) {
+    margin-right: 0px;
+}
+
+.wrapper.vertical > .box:not(:last-child) {
+    margin-bottom: 0px;
+}
+
+.mfooter{
+   padding:15px 0;
+   margin:0 20px;
+   justify-content:flex-end
+}
+.click-icon{
+    font-size: 2em;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+.color-red{
+    color: lightcoral;
+}
+.color-green{
+    color: lightgreen;
+}
+
+.popup{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: none;
+}
+.popup .mask {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #474747;
+    opacity: 0.9;
+}
+.key{
+    position: absolute;
+    width: 50%;
+    left: 50%;
+    top: 45%;
+    margin: -50px 0 0 -130px;
+}
+.language {
+    position: absolute;
+    width: 260px;
+    left: 50%;
+    top: 45%;
+    margin: -50px 0 0 -130px;
+}
+.language h3 {
+    margin: 0 0 12px 0;
+    text-align: center;
+}
+.popup .language .button {
+    text-align: right;
+    display: flex;
+}
+.popup .language .button ui-button {
+    margin: 10px;
+    flex: 1;
+}
+.popup[active] {
+    display: block; 
+}

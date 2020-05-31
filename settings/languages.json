@@ -1,0 +1,36 @@
+{
+  "currentTemplage": "0",
+  "currentLanguage": "",
+  "templates": [
+    "1000"
+  ],
+  "languages": [
+    "en",
+    "zh_cn"
+  ],
+  "textKeyValueMap": {
+    "0": {
+      "launch_header": {
+        "en": "Launch Scene",
+        "note": "启动场景标题",
+        "zh_cn": "启动场景"
+      },
+      "lobby_header": {
+        "en": "Lobby Scene",
+        "note": "大厅场景标题",
+        "zh_cn": "大厅场景"
+      },
+      "login_header": {
+        "en": "Login Scene",
+        "note": "登录场景标题",
+        "zh_cn": "登录场景"
+      }
+    }
+  },
+  "spriteKeyValueMap": {
+    "0": {}
+  },
+  "audioKeyValueMap": {
+    "0": {}
+  }
+}

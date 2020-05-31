@@ -1,0 +1,206 @@
+@import url(app://node_modules/font-awesome/css/font-awesome.min.css);
+.progress ui-progress,
+.state {
+    width: 100%
+}
+
+:host {
+    display: flex;
+    flex-direction: column
+}
+
+h2 {
+    margin: 20px 20px 0;
+    font-size: 26px;
+    color: #DDD
+}
+h3.green{
+    color:#090;
+}
+header {
+    display: flex;
+    margin: 0 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #666;
+
+}
+
+.progress {
+    flex: 14;
+    position: relative
+}
+
+.state {
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 16px;
+    margin: 0 15px 0 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    color: #fff
+}
+
+.state[state=failed] {
+    color: red
+}
+
+section {
+    margin: 10px;
+    padding: 0 10px;
+    flex: 1;
+    overflow-y: auto
+}
+
+.fix-width {
+    width: 1px
+}
+
+.height-limited {
+    max-height: 240px
+}
+
+.height-limited ui-box-container {
+    max-height: 228px;
+    min-height: 100px
+}
+
+ui-box-container li {
+    margin: 4px 0
+}
+
+ui-box-container li .fa.fa-star {
+    color: #ff0
+}
+
+footer {
+    border-top: 1px solid #666;
+    padding: 15px 0;
+    margin: 0 20px;
+    justify-content: flex-end
+}
+
+ui-drop-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    /* width: 50px;
+    height: 50px; */
+    /* padding: 15px; */
+    margin: 15px;
+    border: 5px dotted #666;
+    color: #888;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+ui-drop-area[multi] {
+    border: 5px dotted #660;
+    color: #880;
+}
+
+ui-drop-area[drag-hovering] {
+    border-color: #090;
+    color: #090;
+}
+
+ui-drop-area.nested {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: 100px;
+}
+
+.drag-area {
+    border: 1px solid #666;
+    box-shadow: inset 0 0 8px 2px rgba(0, 0, 0, 0.2);
+    background: #333;
+}
+
+.drag {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    width: 20px;
+    height: 20px;
+    padding: 15px;
+    margin: 15px;
+    background: #900;
+    color: black;
+    font-weight: bold;
+    border: 1px solid #f00;
+    border-radius: 3px;
+}
+
+.drag:hover {
+    border: 1px solid #0f0;
+    background: #090;
+}
+
+.hdpi {
+    width: 48px;
+    height: 48px;
+}
+
+.mdpi {
+    width: 72px;
+    height: 72px;
+}
+
+.xhdpi {
+    width: 92px;
+    height: 92px;
+}
+
+.xxhdpi {
+    width: 144px;
+    height: 144px;
+}
+.Icon-20{
+    width: 20px;height: 20px;
+}
+.compress-option {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    background-color: rgba(105, 105, 105, 0.45);
+}
+
+.compress-option ui-prop {
+    margin-right: 10px;
+}
+
+.compress-tab {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    border-bottom: rgba(43, 40, 40, 0.52) solid 2px;
+}
+
+.compress-tab span {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0px;
+}
+
+.compress-tab span.icon {
+    font-size: 20px;
+}
+
+.compress-tab span.active {
+    background-color: black;
+}
+
+
+.dropbox {
+    border: .25rem dashed #007bff;
+    min-height: 5rem;
+}

@@ -1,0 +1,10 @@
+{
+   "version": "0.0.1",
+   "assets": {
+      "subpackages/lobby/index.js": {
+         "size": 8149,
+         "md5": "2d28186d2ba3eb49adbafa967fdd9baa"
+      }
+   },
+   "searchPaths": []
+}

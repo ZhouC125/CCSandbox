@@ -1,0 +1,68 @@
+{
+  "localServerPath": "/Users/weilaijia/Documents/cc-sandbox/server/hotUpdate",
+  "companys": [
+    {
+      "currentPackage": "com.sandbox.test",
+      "id": "1000",
+      "name": "测试公司",
+      "packages": {
+        "com.sandbox.test": {
+          "appName": "天天酷跑",
+          "configurations": [
+            {
+              "hotUpdateUrl": "http://192.168.1.2",
+              "serverHost": ""
+            },
+            {
+              "hotUpdateUrl": "",
+              "serverHost": ""
+            }
+          ],
+          "developmentModel": "0",
+          "fileName": "ttkp",
+          "icons": {
+            "android": {},
+            "ios": {}
+          },
+          "launch": {}
+        }
+      },
+      "template": "theme"
+    }
+  ],
+  "templates": {
+    "theme": {
+      "common": {
+        "isSubpackage": false,
+        "layout": "layout_0",
+        "skin": "skin_0"
+      },
+      "launch": {
+        "isSubpackage": false,
+        "layout": "layout_0",
+        "skin": "skin_0"
+      },
+      "lobby": {
+        "isSubpackage": true,
+        "layout": "layout_0",
+        "skin": "skin_0",
+        "version": "0.0.1",
+        "md5": "891b95e369bd6d8d38c8d347cb12ce3c"
+      },
+      "login": {
+        "isSubpackage": true,
+        "layout": "layout_0",
+        "skin": "skin_0",
+        "version": "0.0.1",
+        "md5": "0e4f8b202b66415df5b8c48db613118e"
+      }
+    }
+  },
+  "currentCompany": "0",
+  "currentTemplate": "theme",
+  "currentLanguageTemplage": "0",
+  "fromework": {
+    "md5": "7eed5663e80c91edd67726c787eafedf",
+    "version": "0.0.5"
+  }
+}

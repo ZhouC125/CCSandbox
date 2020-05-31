@@ -1,0 +1,26 @@
+{
+   "version": "0.0.1",
+   "assets": {
+      "subpackages/login/index.js": {
+         "size": 5174,
+         "md5": "9782c8151c4ab90c8191c0329ea32b8f"
+      },
+      "subpackages/login/raw-assets/08/085ef810-c6d8-40ac-9e1e-3b8a80824f89.png": {
+         "size": 1050,
+         "md5": "72c8f8527cdbe8246b8223a54f409ca3"
+      },
+      "subpackages/login/raw-assets/1b/1bfda0a9-b88b-4855-a175-43b60f262372.png": {
+         "size": 1050,
+         "md5": "72c8f8527cdbe8246b8223a54f409ca3"
+      },
+      "subpackages/login/raw-assets/4b/4b1a4391-40bb-4b74-9a50-aa143cdb985d.png": {
+         "size": 1050,
+         "md5": "72c8f8527cdbe8246b8223a54f409ca3"
+      },
+      "subpackages/login/raw-assets/59/5950aabb-296d-455e-b04b-5b65e9e1c465.png": {
+         "size": 1050,
+         "md5": "72c8f8527cdbe8246b8223a54f409ca3"
+      }
+   },
+   "searchPaths": []
+}

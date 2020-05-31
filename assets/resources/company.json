@@ -1,0 +1,9 @@
+{
+  "id": "1000",
+  "name": "测试公司",
+  "template": "theme",
+  "package": "com.sandbox.test",
+  "developmentModel": "0",
+  "serverHost": "",
+  "hotUpdateUrl": "http://192.168.1.2"
+}

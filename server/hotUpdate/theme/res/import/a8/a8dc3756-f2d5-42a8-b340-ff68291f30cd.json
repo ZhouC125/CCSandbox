@@ -1,0 +1,29 @@
+{
+  "__type__": "cc.JsonAsset",
+  "_name": "runtime",
+  "json": {
+    "template": "theme",
+    "modules": {
+      "common": {
+        "isSubpackage": false,
+        "layout": "layout_0",
+        "skin": "skin_0"
+      },
+      "launch": {
+        "isSubpackage": false,
+        "layout": "layout_0",
+        "skin": "skin_0"
+      },
+      "lobby": {
+        "isSubpackage": true,
+        "layout": "layout_0",
+        "skin": "skin_0"
+      },
+      "login": {
+        "isSubpackage": true,
+        "layout": "layout_0",
+        "skin": "skin_0"
+      }
+    }
+  }
+}

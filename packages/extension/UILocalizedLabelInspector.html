@@ -1,0 +1,29 @@
+<ui-prop tabindex="-1" name="{{target.key.attrs.displayName||target.key.type}}" auto-height :multi-values="multi"
+    class="flex-1 layout horizontal center">
+    <ui-input placeholder="请输入本地化Key" @blur="_onKeyBlur()" class="flex-1" tabindex="-1" v-value="target.key.value">
+    </ui-input>
+</ui-prop>
+<!-- <ui-prop v-prop="target.string" @blur="onclick()" :multi-values="multi"></ui-prop> -->
+<ui-prop tabindex="-1" name="{{target.string.attrs.displayName||target.string.type}}" auto-height :multi-values="multi"
+    class="flex-1 layout horizontal center">
+    <ui-text-area resize-v tabindex="-1" @blur="_onStringBlur()" class="flex-1" v-value="target.string.value">
+    </ui-text-area>
+</ui-prop>
+
+
+<ui-prop v-prop="target.horizontalAlign" :multi-values="multi"></ui-prop>
+<ui-prop v-prop="target.verticalAlign" :multi-values="multi"></ui-prop>
+<ui-prop v-prop="target.actualFontSize" v-show="!_hiddenActualFontSize()" :multi-values="multi"></ui-prop>
+<ui-prop type="number" v-prop="target.fontSize"> :multi-values="multi" </ui-prop>
+<ui-prop v-prop="target._bmFontOriginalSize" v-show="_isBMFont()" :multi-values="multi"></ui-prop>
+<ui-prop v-prop="target.lineHeight" :multi-values="multi"></ui-prop>
+<ui-prop v-prop="target.spacingX" v-show="_isBMFont()" :multi-values="multi"></ui-prop>
+<ui-prop v-prop="target.overflow" :multi-values="multi"></ui-prop>
+<ui-prop v-prop="target.omitted" placeholder='请输入省略符 例 "..."' v-show="_showFilterSymbol()" :multi-values="multi">
+</ui-prop>
+<ui-prop v-prop="target.enableWrapText" v-show="!_hiddenWrapText()" :multi-values="multi"></ui-prop>
+<ui-prop v-prop="target.font" :multi-values="multi"></ui-prop>
+<ui-prop v-prop="target.fontFamily" v-show="_isSystemFont()" :multi-values="multi"></ui-prop>
+<ui-prop v-prop="target.cacheMode" v-show="!_isBMFont()" :multi-values="multi"></ui-prop>
+<ui-prop v-prop="target.useSystemFont" :multi-values="multi"></ui-prop>
+<cc-array-prop :target.sync="target.sharedMaterials"></cc-array-prop>

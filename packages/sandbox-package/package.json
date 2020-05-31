@@ -1,0 +1,44 @@
+{
+  "name": "sandbox-package",
+  "version": "0.0.1",
+  "description": "The package template for getting started.",
+  "author": "Cocos Creator",
+  "main": "main.js",
+  "main-menu": {
+
+    "i18n:sandbox-package.menuTitle/i18n:sandbox-package.package_configuration": {
+      "message": "sandbox-package:configuration"
+    },
+    "i18n:sandbox-package.menuTitle/i18n:sandbox-package.skin_resurfacing": {
+      "message": "sandbox-package:skinResurfacing"
+    },
+    "i18n:sandbox-package.menuTitle/i18n:sandbox-package.languages": {
+      "message": "sandbox-package:languages"
+    }
+   
+  },
+  "panel.skinResurfacing": {
+    "main": "panel/skinResurfacing/index.js",
+    "type": "dockable",
+    "title": "i18n:sandbox-package.skin_resurfacing",
+    "width": 800,
+    "height": 600
+  },
+  "panel.configuration": {
+    "main": "panel/configuration/index.js",
+    "type": "dockable",
+    "title": "i18n:sandbox-package.package_configuration",
+    "width": 800,
+    "height": 900
+  },
+  "panel.languages": {
+    "main": "panel/languages/index.js",
+    "type": "dockable",
+    "title": "i18n:sandbox-package.languages",
+    "width": 800,
+    "height": 900
+  }
+ 
+ 
+}
+

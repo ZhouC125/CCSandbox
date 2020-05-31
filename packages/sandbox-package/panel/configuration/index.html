@@ -1,0 +1,177 @@
+<h2>出包配置</h2>
+<header>
+</header>
+<section v-if="show">
+    <ui-loader v-if="showLoader" class="green"></ui-loader>
+    <ui-prop tabindex="-1" name="当前公司">
+        <ui-select class="flex-1 large" tabindex="-1" v-bind:value="onGetCurrentCompany()"
+            @confirm="onChangeCompany($event)">
+            <option v-for="(index, item) in onGetCompanys()" v-value="index">{{item.name}}</option>
+        </ui-select>
+        <ui-button @confirm="onEditorCompany()">创建新公司</ui-button>
+    </ui-prop>
+    <!-- 创建新公司 开始-->
+    <ui-box-container v-if="isCreateCompanying" auto-height class="flex-1 shadow">
+        <ui-hint v-if="editorCompanyError" class="bottom small red">{{editorCompanyError}}</ui-hint>
+        <ui-prop tabindex="-1" name="公司名称">
+            <div class="flex-1 layout horizontal center">
+                <ui-input placeholder="请输入公司名称" class="flex-2" tabindex="-1" v-value="editorCompanyName">
+                </ui-input>
+            </div>
+        </ui-prop>
+        <ui-prop tabindex="-1" name="公司唯ID">
+            <div class="flex-1 layout horizontal center">
+                <ui-input placeholder="公司唯一ID，数字或字符串" class="flex-2" tabindex="-1" v-value="editorCompanyID">
+                </ui-input>
+            </div>
+        </ui-prop>
+        <div class="flex-1 layout horizontal end-justified">
+            <ui-button @confirm="onCreateCompany(false)">取消</ui-button>
+            <ui-button class="green" @confirm="onCreateCompany(true)">创建</ui-button>
+        </div>
+    </ui-box-container>
+    <!-- 创建新公司 结束-->
+
+    <div v-if="onGetCompany()">
+        <ui-prop tabindex="-1" name="公司ID">
+            <div class="flex-1 layout horizontal center">
+                <h3 class="green">{{onGetCompanyID()}}</h3>
+            </div>
+        </ui-prop>
+
+        <ui-prop tabindex="-1" name="公司皮肤">
+            <ui-select class="flex-1 large" tabindex="-1" v-bind:value="onGetCompanyTemplate()"
+                @confirm="onChangeCompanyTemplate($event)">
+                <option v-for="(index,item) in onGetTemplates()" v-value="index">{{index}}</option>
+            </ui-select>
+        </ui-prop>
+
+        <ui-prop tabindex="-1" name="语言包">
+            <ui-select class="flex-1 large" tabindex="-1" v-bind:value="onGetLanguageTemplate()"
+                @confirm="onChangeLanguageTemplate($event)">
+                <option v-for="(index,item) in onGetLanguageTemplates()" v-value="index">{{item}}</option>
+            </ui-select>
+        </ui-prop>
+
+        <ui-prop tabindex="-1" name="包名">
+            <div class="flex-1 layout horizontal center">
+                <ui-select class="flex-1 large" tabindex="-1" @confirm="onChangePackage($event)"
+                    v-bind:value="onGetCurrentPackage()">
+                    <option v-for="(index,item) in onGetPackages()" v-value="index">{{index}}</option>
+                </ui-select>
+                <ui-button @confirm="onEditorPackage()">创建包名</ui-button>
+            </div>
+        </ui-prop>
+        <!-- 创建包名 开始 -->
+        <ui-box-container v-if="isCreatePackageing" auto-height class="flex-1 shadow">
+            <ui-hint v-if="editorPackageError" class="bottom small red">{{editorPackageError}}</ui-hint>
+            <ui-prop tabindex="-1">
+                <div class="flex-1 layout horizontal center">
+                    <ui-input placeholder="请输入包名" class="flex-2" tabindex="-1" v-value="editorPackageName">
+                    </ui-input>
+                </div>
+            </ui-prop>
+            <div class="flex-1 layout horizontal end-justified">
+                <ui-button @confirm="onCreatePackage(false)">取消</ui-button>
+                <ui-button class="green" @confirm="onCreatePackage(true)">创建</ui-button>
+            </div>
+        </ui-box-container>
+        <!-- 创建包名 结束 -->
+
+        <div v-if="onGetCurrentPackage()">
+            <ui-prop tabindex="-1 " name="应用名称">
+                <ui-input placeholder="例如：自走棋" class="flex-2" tabindex="-1" @confirm="onChangeAppName($event)"
+                    v-bind:value="onGetAppName()">
+                </ui-input>
+            </ui-prop>
+
+            <ui-prop tabindex="-1 " name="包文件名">
+                <ui-input placeholder="用于apk/ipa 文件名" class="flex-2" tabindex="-1" @confirm="onChangeFileName($event)"
+                    v-bind:value="onGetFileName()">
+                </ui-input>
+            </ui-prop>
+
+
+            <!-- 微信SDK 开始 -->
+
+            <ui-prop tabindex="-1 " auto-height name="微信SDK">
+                <ui-box-container auto-height class="flex-1 shadow group layout center">
+                    <ui-prop tabindex="-1" name="App ID">
+                        <ui-input placeholder="用于微信sdk的app_id" class="flex-1" tabindex="-1"
+                            @confirm="onChangeAppID($event)" v-bind:value="onGetAppID()">
+                        </ui-input>
+                    </ui-prop>
+                    <ui-prop tabindex="-1" name="App Secret">
+                        <ui-input placeholder="用于微信sdk的app_secret" class="flex-1" tabindex="-1"
+                            @confirm="onChangeAppSecret($event)" v-bind:value="onGetAppSecret()">
+                        </ui-input>
+                    </ui-prop>
+                </ui-box-container>
+            </ui-prop>
+            <!-- 微信SDK 结束 -->
+
+
+            <ui-prop tabindex="-1 " name="当前模式 ">
+                <ui-select class="flex-1 large" tabindex="-1" v-bind:value="onGetDevelopmentModel()"
+                    @confirm="onChangeDevelopmentModel($event)">
+                    <option value="0">开发</option>
+                    <option value="1">发布</option>
+                </ui-select>
+            </ui-prop>
+
+            <ui-prop tabindex="-1" name="热更新地址">
+                <div class="flex-1 layout horizontal center">
+                    <ui-input class="flex-2 " tabindex="-1" v-bind:value="onGetHotUpdateUrl()"
+                        @confirm="onChangeHotUpdateUrl($event)">
+                    </ui-input>
+                </div>
+            </ui-prop>
+            <ui-prop tabindex="-1" name="服务器地址">
+                <div class="flex-1 layout horizontal center">
+                    <ui-input class="flex-2" tabindex="-1" v-bind:value="onGetServerHost()"
+                        @confirm="onChangeServerHost($event)">
+                    </ui-input>
+                </div>
+            </ui-prop>
+
+            <ui-prop auto-height class="compress-option" tabindex="-1" name="平台配置">
+                <div class="compress-tab flex layout row flex-1 ">
+                    <span title="Android" class="icon fa fa-android" v-on:click="onChangePlatform('android')"
+                        v-bind:class="{ active: platform=='android' } "></span>
+                    <span title="iOS" class="icon fa fa-mobile" v-on:click="onChangePlatform('ios')"
+                        v-bind:class="{ active: platform=='ios' } "></span>
+                    <span title="HTML5" class="icon fa fa-html5" v-on:click="onChangePlatform('h5')"
+                        v-bind:class="{ active: platform=='h5' } "></span>
+                </div>
+            </ui-prop>
+            <ui-box-container class="flex-1 shadow group layout horizontal center">
+                <canvas class="xxhdpi"
+                    style="background-size: cover; margin: auto; display: block; background-repeat: no-repeat; background-position: center center; "
+                    v-bind:style="{backgroundImage:'url('+onGetIcon()+')'}">
+                </canvas>
+                <canvas
+                    style="background-size: cover;  margin: auto; display: block; background-repeat:no-repeat; background-position: center center; "
+                    v-bind:style="{backgroundImage:'url('+onGetLaunch()+')'}">
+                </canvas>
+            </ui-box-container>
+
+
+        </div>
+    </div>
+
+    <!-- 本地资源服务器路径 -->
+    <ui-prop tabindex="-1" name="本地资源服务器路径">
+        <div class="flex-1 layout horizontal center">
+            <ui-input placeholder="本地资源服务器路径" class="flex-2" tabindex="-1" v-bind:value="getLocalServerPath()">
+            </ui-input>
+            <ui-button @confirm="onOpenFileToLocalServerPath()">...</ui-button>
+            <ui-button @confirm="onOpenLocalServerPath()">打开</ui-button>
+        </div>
+    </ui-prop>
+
+
+</section>
+
+<footer class="group layout horizontal center">
+    <ui-button class="green" @confirm="onSave">保存</ui-button>
+</footer>
