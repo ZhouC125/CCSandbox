@@ -19,12 +19,12 @@ export default class lobby_model extends AbstractModel {
 
     }
     // 变量定义示例，”__“ 双下划线开头
-    @Mutable __testVar: string = "我是默认值"
+    @Mutable __testVar: string = "我是__testVar默认值"
 
     public change() {
         cc.log(this.__testVar)
         setTimeout(() => {
-            this.__testVar = "变量由model修改"
+            this.__testVar = "当前 __testVar 变量由 model 修改"
         }, 1000)
     }
 }

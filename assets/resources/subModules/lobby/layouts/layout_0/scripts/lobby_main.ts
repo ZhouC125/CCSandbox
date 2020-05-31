@@ -20,20 +20,30 @@ export default class lobby_main extends AbstractView<lobby_view_model> {
     @property(cc.Label) refreshLabel: cc.Label = null
     onLoad() {
         this.on('onClick', () => {
-            cc.log("onClick 被点击")
+            cc.log("view层监听到了 viewModel 中的 onClick 被点击")
         })
         this.bind('__testVar', (value: string) => {
-            cc.log('__testVar 被改变', value)
+            cc.log('view层通过this.bind的方式 监听到了__testVar 被改变', value)
         })
     }
+    /**
+     * 当__testVar被改变 刷新显示
+     * @param value 最新的值
+     */
     @Binding __testVar(value: string) {
         this.varLabel.string = value
     }
-
+    /**
+     * 当__inputValue被改变 刷新显示
+     * @param value 最新的值
+     */
     @Binding __inputValue(value: string) {
         this.showLabel.string = value
     }
-
+    /**
+     * __common_refresh这个值的更新来自于 common 模块的 common_model
+     * @param value 最新的值
+     */
     @Binding __common_refresh(value: number) {
         this.refreshLabel.string = `来自注入model的通知 值：${value}`
     }

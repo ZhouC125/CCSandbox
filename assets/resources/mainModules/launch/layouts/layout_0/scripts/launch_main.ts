@@ -43,7 +43,7 @@ export default class launch_main extends AbstractView<launch_view_model> {
     }
 }
 
-// 这是一个测试 用来编辑多语言json 然后复制到多语言配置中取生成配置
+// 这是一个测试 用来编辑多语言json 复制它 然后打开多语言配置面板，找到Text点击➕ 然后粘贴一下内容即可生成多语言配置
 [
     {
         "launch_header": {
