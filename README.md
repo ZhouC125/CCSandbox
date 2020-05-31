@@ -1,4 +1,4 @@
-# cc-sandbox
+# CCSandbox
 
 一个基于MVVM设计的CocosCreator游戏框架，数据和视图实现数据绑定  多渠道 多皮肤 多包名（大厅+子游戏）
 
