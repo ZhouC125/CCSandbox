@@ -91,7 +91,7 @@ module.exports = {
 
         var i18n = []
 
-        i18n.push(`import Notify from '../fromework/cores/Notify'`)
+        i18n.push(`import Notify from '../framework/cores/Notify'`)
         i18n.push(`export enum Languages {`)
         i18n = i18n.concat(this.getLanguages(language))
         i18n.push(`}`)
