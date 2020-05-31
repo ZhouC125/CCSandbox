@@ -26,6 +26,39 @@
 * subModules 目录存放子模块，游戏过程中选择性的安装子模块，（子游戏下载/更新）
 * languages 目录是由出包配置生成的多语言typescript脚本
 
+
+主要抽象类描述
+---
+* AbstractModule: 模块抽象类，持有本模块的 model 和 viewModel
+* AbstractModel: model抽象类 每个模块的model都要继承它 每个模块可以有一个或多个model和viewModel
+* AbstractViewModel: viewModel抽象类 只能持有一个model
+* AbstractView: view抽象类 只能持有一个viewModel 每个UI脚本都要继承它
+
+
+类装饰器描述
+---
+* @Model(model:AbstractModel) 使用在viewModel中 用来指定当前的viewModel 持有的model
+
+* @Inject(module:string,model:AbstractModel) 使用在viewModel中 
+  - module:要注入的模块名 
+  - model:要注入的model 指定后会将指定的model中的变量绑定到当前的viewModel 中 例如通用的服务器通知，不需要每个model都去监听，只需要注入一个通用的model即可，当被注入的model中的字段改变时会被通知
+
+* @Model 和 @Inject的区别是 @Model只能使用本模块下的model并且可以在当前的viewModel去改变他的值，@Inject注入进来的是其他模块的model,只能被通知，无法修改注入model的字段
+
+* @ViewModel(module:string , viewModel:AbstractViewModel,autoInjectCommands?:boolean) 使用在view中 每个view只能持有一个viewModel
+  - module:指定当前模块名， 
+  - viewModel：要使用的viewModel  
+  - autoInjectCommands：用来确定是否将viewModel的方法注入到本view中
+
+属性装饰器描述
+---
+* @Mutable 用在model中 用来修饰一个变量 当这个变量有改变是会通知到viewModel同名变量中
+* @Bindable 用在viewModel中 用来修饰一个和model中同名的变量 只有被它修饰的变量才会和model同名变量产生绑定关系
+* @InjectBind 用在viewModel中 用来修饰一个被注入的变量 就是使用@Inject注入的model中的同名变量来接收改变通知
+* @Binding 用在view中 被它修饰的变量会和viewModel中同名变量产生绑定关系，当变量改变时view刷新页面内容
+
+框架内包含几个测试模块 展示了如何使用这些装饰器
+
 测试
 ---
 * 打开工程
@@ -37,6 +70,7 @@
 * 配置本地热更新地址  然后把本地node服务器开启
 * 打开cocos creator 的构建面板 选择平台和配置后 点击构建->编译->运行即可(首次安装包到手机上才需要点击编译->运行)
 * 之后在项目里随便修改点什么 然后点击构建即可 然后重启手机即可查看最新修改
+
 框架内部有几个简单的模块用来简单的说明使用方法，具体可以自行阅读代码
 
 
