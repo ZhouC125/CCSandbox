@@ -1,4 +1,4 @@
-import Notify from '../fromework/cores/Notify'
+import Notify from '../framework/cores/Notify'
 export enum Languages {
 	en = "en",
 	zh_cn = "zh_cn",

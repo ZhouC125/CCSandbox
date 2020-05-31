@@ -1,6 +1,6 @@
-import { ViewModel, Binding } from '../../../../../fromework/abstract/mvvm/AbstractView';
+import { ViewModel, Binding } from '../../../../../framework/abstract/mvvm/AbstractView';
 import common_view_model from '../../../scripts/common_view_model';
-import AbstractView from '../../../../../fromework/abstract/mvvm/AbstractView';
+import AbstractView from '../../../../../framework/abstract/mvvm/AbstractView';
 /**
  * view层 
  * 负责处理显示相关的逻辑

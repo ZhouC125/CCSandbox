@@ -25,7 +25,7 @@ export default class Update {
         }
         this.assetsManager = new jsb.AssetsManager(localManifestPath, this.localSavePath, this.versionCompareHandle.bind(this))
         this.assetsManager.setVerifyCallback(this.verifyCallback.bind(this))
-        cc.log(`${this.name || 'fromework'} 模块`, `manifest 路径:${localManifestPath}`, `储存路径:${this.localSavePath}`)
+        cc.log(`${this.name || 'framework'} 模块`, `manifest 路径:${localManifestPath}`, `储存路径:${this.localSavePath}`)
     }
 
     public checkUpdate(): Promise<boolean> {
@@ -35,23 +35,23 @@ export default class Update {
                 return resolve(false)
             }
             if (!this.initManifest()) {
-                return reject(`${this.name || 'fromework'} 检查时 初始化manifest失败`)
+                return reject(`${this.name || 'framework'} 检查时 初始化manifest失败`)
             }
             this.assetsManager.setEventCallback((event: any) => {
                 switch (event.getEventCode()) {
                     case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
-                        return reject(`ERROR_NO_LOCAL_MANIFEST ${this.name || 'fromework'} 检查更新失败: 没有找到本地manifest文件`)
+                        return reject(`ERROR_NO_LOCAL_MANIFEST ${this.name || 'framework'} 检查更新失败: 没有找到本地manifest文件`)
                     case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
-                        return reject(`ERROR_DOWNLOAD_MANIFEST ${this.name || 'fromework'} 下载 manifest 失败`)
+                        return reject(`ERROR_DOWNLOAD_MANIFEST ${this.name || 'framework'} 下载 manifest 失败`)
                     case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
-                        return reject(`ERROR_PARSE_MANIFEST ${this.name || 'fromework'} 下载 manifest 失败`)
+                        return reject(`ERROR_PARSE_MANIFEST ${this.name || 'framework'} 下载 manifest 失败`)
                     case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
                         return resolve(false)
                     case jsb.EventAssetsManager.NEW_VERSION_FOUND:
                         return resolve(true)
                 }
             })
-            cc.log(`${this.name || 'fromework'} 检查中...`)
+            cc.log(`${this.name || 'framework'} 检查中...`)
             this.assetsManager.checkUpdate()
         })
     }
@@ -92,22 +92,22 @@ export default class Update {
     public startUpdate(progressEvent?: (event: HotUpdateProgressEvent) => void): Promise<boolean> {
         return new Promise((resolve, reject) => {
             if (!this.isHotUpdate()) {
-                // cc.log(`${this.name || 'fromework'} 不需要更新 `)
+                // cc.log(`${this.name || 'framework'} 不需要更新 `)
                 // 不需要更新
                 return resolve(false)
             }
             if (!this.initManifest()) {
-                return reject(`${this.name || 'fromework'} 更新时 初始化manifest失败`)
+                return reject(`${this.name || 'framework'} 更新时 初始化manifest失败`)
             }
             var progress = new HotUpdateProgressEvent()
             progressEvent = progressEvent || function () { }
             this.assetsManager.setEventCallback((event: any) => {
                 switch (event.getEventCode()) {
                     case jsb.EventAssetsManager.READY_TO_UPDATE:
-                        cc.log(`${this.name || 'fromework'} 断点续传: ${event.isResuming()}`)
+                        cc.log(`${this.name || 'framework'} 断点续传: ${event.isResuming()}`)
                         break
                     case jsb.EventAssetsManager.NEW_VERSION_FOUND:
-                        cc.log(`${this.name || 'fromework'} 找到了最新的版本文件`)
+                        cc.log(`${this.name || 'framework'} 找到了最新的版本文件`)
                         var remote = this.assetsManager.getRemoteManifest();
                         if (remote) {
                             this.setRemoteUrls(remote)
@@ -125,31 +125,31 @@ export default class Update {
                         break
                     case jsb.EventAssetsManager.ERROR_NO_LOCAL_MANIFEST:
                         this.assetsManager.setEventCallback(null)
-                        reject(`${this.name || 'fromework'} 本地 manifest 错误`)
+                        reject(`${this.name || 'framework'} 本地 manifest 错误`)
                         break
                     case jsb.EventAssetsManager.ERROR_DOWNLOAD_MANIFEST:
                         this.assetsManager.setEventCallback(null)
-                        reject(`${this.name || 'fromework'} 下载 manifest 错误`)
+                        reject(`${this.name || 'framework'} 下载 manifest 错误`)
                         break
                     case jsb.EventAssetsManager.ERROR_PARSE_MANIFEST:
                         this.assetsManager.setEventCallback(null)
-                        reject(`${this.name || 'fromework'} 解析 manifest 错误`)
+                        reject(`${this.name || 'framework'} 解析 manifest 错误`)
                         break
                     case jsb.EventAssetsManager.ERROR_DECOMPRESS:
-                        cc.error(`${this.name || 'fromework'} 解压文件${event.getAssetId()}失败,原因:${event.getMessage()}`)
+                        cc.error(`${this.name || 'framework'} 解压文件${event.getAssetId()}失败,原因:${event.getMessage()}`)
                         this.assetsManager.setEventCallback(null)
-                        reject(`${this.name || 'fromework'} 模块解压文件${event.getAssetId()}失败`)
+                        reject(`${this.name || 'framework'} 模块解压文件${event.getAssetId()}失败`)
                         break
                     case jsb.EventAssetsManager.ERROR_UPDATING:
-                        cc.warn(`${this.name || 'fromework'} 下载文件${event.getAssetId()}失败,原因:${event.getMessage()}`)
+                        cc.warn(`${this.name || 'framework'} 下载文件${event.getAssetId()}失败,原因:${event.getMessage()}`)
                         break
                     case jsb.EventAssetsManager.ALREADY_UP_TO_DATE:
-                        cc.log(`${this.name || 'fromework'} 已经是最新版本`)
+                        cc.log(`${this.name || 'framework'} 已经是最新版本`)
                         this.assetsManager.setEventCallback(null)
                         resolve(false)
                         break
                     case jsb.EventAssetsManager.UPDATE_FINISHED:
-                        cc.log(`${this.name || 'fromework'} 更新完成！`)
+                        cc.log(`${this.name || 'framework'} 更新完成！`)
                         this.assetsManager.setEventCallback(null)
                         this.updateSearchPath()
                         resolve(true)
@@ -158,14 +158,14 @@ export default class Update {
                         if (this.retryCount > 0) {
                             this.assetsManager.downloadFailedAssets()
                             this.retryCount--
-                            cc.error(`${this.name || 'fromework'} 更新失败！尝试重新下载 剩余下载次数:${this.retryCount}`)
+                            cc.error(`${this.name || 'framework'} 更新失败！尝试重新下载 剩余下载次数:${this.retryCount}`)
                         } else {
                             this.assetsManager.setEventCallback(null)
-                            reject(`${this.name || 'fromework'} 更新失败`)
+                            reject(`${this.name || 'framework'} 更新失败`)
                         }
                         break
                     case jsb.EventAssetsManager.ASSET_UPDATED:
-                        cc.log(`${this.name || 'fromework'} 下载文件${event.getAssetId()}成功`)
+                        cc.log(`${this.name || 'framework'} 下载文件${event.getAssetId()}成功`)
                         if (cc.path.extname(event.getAssetId()) == ".zip") {
                             var manifestFile = cc.path.join(`${this.localSavePath}_temp`, `${this.projectManifest}.temp`)
                             var isExists = jsb.fileUtils.isFileExist(manifestFile)
@@ -176,7 +176,7 @@ export default class Update {
                         break
                 }
             })
-            cc.log(`${this.name || 'fromework'} 更新中...`)
+            cc.log(`${this.name || 'framework'} 更新中...`)
             this.assetsManager.update()
         })
     }
@@ -196,10 +196,10 @@ export default class Update {
             let manifest = this.getManifest()
             var manifestObj = new jsb.Manifest(JSON.stringify(manifest), this.localSavePath);
             this.assetsManager.loadLocalManifest(manifestObj, this.localSavePath)
-            cc.log(`${this.name || 'fromework'} 模块:初始化manifest`, manifest)
+            cc.log(`${this.name || 'framework'} 模块:初始化manifest`, manifest)
         }
         if (!this.assetsManager.getLocalManifest() || !this.assetsManager.getLocalManifest().isLoaded()) {
-            cc.error(`${this.name || 'fromework'} 模块:初始化manifest失败`)
+            cc.error(`${this.name || 'framework'} 模块:初始化manifest失败`)
             return false
         }
         // 将服务器更新地址写入manifest
@@ -232,7 +232,7 @@ export default class Update {
         manifest.setPackageUrl(urlJoin(Company.instance.hotUpdateUrl, Runtime.instance.template, "/"))
         manifest.setManifestUrl(urlJoin(manifest.getPackageUrl(), relativePath, this.projectManifest))
         manifest.setVersionUrl(urlJoin(manifest.getPackageUrl(), relativePath, this.versionManifest))
-        cc.log(`${this.name || 'fromework'} 模块更新地址:`, manifest.getPackageUrl(), manifest.getVersionFileUrl(), manifest.getManifestFileUrl())
+        cc.log(`${this.name || 'framework'} 模块更新地址:`, manifest.getPackageUrl(), manifest.getVersionFileUrl(), manifest.getManifestFileUrl())
     }
     /**
      * 更新搜索路径
@@ -255,16 +255,16 @@ export default class Update {
                 continue;
             }
             else {
-                cc.log(`${this.name || 'fromework'} 模块: 本地版本:${versionA} <=> 远程版本:${versionB} ${(a - b) < 0 ? "需要更新" : "不更新"}`)
+                cc.log(`${this.name || 'framework'} 模块: 本地版本:${versionA} <=> 远程版本:${versionB} ${(a - b) < 0 ? "需要更新" : "不更新"}`)
                 return a - b;
             }
         }
         if (vB.length > vA.length) {
-            cc.log(`${this.name || 'fromework'} 模块: 本地版本:${versionA} <=> 远程版本:${versionB} ${vB.length > vA.length ? "需要更新" : "不更新"}`)
+            cc.log(`${this.name || 'framework'} 模块: 本地版本:${versionA} <=> 远程版本:${versionB} ${vB.length > vA.length ? "需要更新" : "不更新"}`)
             return -1;
         }
         else {
-            cc.log(`${this.name || 'fromework'} 模块: 本地版本:${versionA} <=> 远程版本:${versionB} 不更新`)
+            cc.log(`${this.name || 'framework'} 模块: 本地版本:${versionA} <=> 远程版本:${versionB} 不更新`)
             return 0;
         }
     }

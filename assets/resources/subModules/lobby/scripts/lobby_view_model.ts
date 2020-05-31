@@ -4,7 +4,7 @@
  * 它是view和model的粘合层，使用@Bindable来绑定model的同名变量 只有绑定了变量，view才会收到通知
  * 如果未使用@Bindable 则不会收到 model 的通知
  */
-import { AbstractViewModel, Model, Bindable, Command, Inject, InjectBind } from '../../../fromework/abstract/mvvm/AbstractViewModel';
+import { AbstractViewModel, Model, Bindable, Command, Inject, InjectBind } from '../../../framework/abstract/mvvm/AbstractViewModel';
 import lobby_model from './lobby_model';
 import { i18n, Languages } from '../../../languages/i18n';
 import common_model from '../../../mainModules/common/scripts/common_model';

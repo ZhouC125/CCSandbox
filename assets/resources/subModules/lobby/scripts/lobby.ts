@@ -2,8 +2,8 @@
  * 模块入口
  * 每个模块都会有一个入口文件，并在整个游戏生命周期中长期存在
  */
-import AbstractModule, { Module } from '../../../fromework/abstract/mvvm/AbstractModule';
-import SceneManager from '../../../fromework/singles/SceneManager';
+import AbstractModule, { Module } from '../../../framework/abstract/mvvm/AbstractModule';
+import SceneManager from '../../../framework/singles/SceneManager';
 const { ccclass, property } = cc._decorator;
 /**
  * @Module 

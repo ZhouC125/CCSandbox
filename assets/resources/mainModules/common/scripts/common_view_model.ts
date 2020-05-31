@@ -4,7 +4,7 @@
  * 它是view和model的粘合层，使用@Bindable来绑定model的同名变量 只有绑定了变量，view才会收到通知
  * 如果未使用@Bindable 则不会收到 model 的通知
  */
-import { AbstractViewModel, Model, Bindable, Command } from '../../../fromework/abstract/mvvm/AbstractViewModel';
+import { AbstractViewModel, Model, Bindable, Command } from '../../../framework/abstract/mvvm/AbstractViewModel';
 import common_model from './common_model';
 /**
  * @Model 固定写法，指定当前 viewModel 的 model

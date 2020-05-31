@@ -4,13 +4,13 @@
  * 它是view和model的粘合层，使用@Bindable来绑定model的同名变量 只有绑定了变量，view才会收到通知
  * 如果未使用@Bindable 则不会收到 model 的通知
  */
-import { AbstractViewModel, Model } from '../../../fromework/abstract/mvvm/AbstractViewModel';
+import { AbstractViewModel, Model } from '../../../framework/abstract/mvvm/AbstractViewModel';
 import launch_model from './launch_model';
-import Runtime from '../../../fromework/singles/Runtime';
-import Company from '../../../fromework/singles/Company';
-import { HotUpdateProgressEvent } from '../../../fromework/cores/Update';
-import ModuleUpdate from '../../../fromework/singles/ModuleUpdate';
-import Facade from '../../../fromework/cores/Facade';
+import Runtime from '../../../framework/singles/Runtime';
+import Company from '../../../framework/singles/Company';
+import { HotUpdateProgressEvent } from '../../../framework/cores/Update';
+import ModuleUpdate from '../../../framework/singles/ModuleUpdate';
+import Facade from '../../../framework/cores/Facade';
 /**
  * @Model 固定写法，指定当前 viewModel 的 model
  */

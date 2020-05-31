@@ -7,7 +7,7 @@ export default class Notify {
     private static _instance: Notify = null
     public static get instance(): Notify {
         if (this._instance === null) {
-            this._instance = new Notify("fromework")
+            this._instance = new Notify("framework")
         }
         return this._instance
     }

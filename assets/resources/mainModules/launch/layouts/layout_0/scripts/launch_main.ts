@@ -1,8 +1,8 @@
-import { ViewModel, Binding } from '../../../../../fromework/abstract/mvvm/AbstractView';
+import { ViewModel, Binding } from '../../../../../framework/abstract/mvvm/AbstractView';
 import launch_view_model from '../../../scripts/launch_view_model';
-import AbstractView from '../../../../../fromework/abstract/mvvm/AbstractView';
-import { HotUpdateProgressEvent } from '../../../../../fromework/cores/Update';
-import Utils from '../../../../../fromework/tools/Utils';
+import AbstractView from '../../../../../framework/abstract/mvvm/AbstractView';
+import { HotUpdateProgressEvent } from '../../../../../framework/cores/Update';
+import Utils from '../../../../../framework/tools/Utils';
 import { i18n, Languages } from '../../../../../languages/i18n';
 /**
  * view层 
